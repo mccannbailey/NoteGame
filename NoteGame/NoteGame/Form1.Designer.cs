@@ -37,6 +37,7 @@
             this.bLabel = new System.Windows.Forms.Label();
             this.cLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.sceneLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // outputLabel
@@ -139,11 +140,21 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Outcome:";
             // 
+            // sceneLabel
+            // 
+            this.sceneLabel.BackColor = System.Drawing.Color.Transparent;
+            this.sceneLabel.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sceneLabel.Location = new System.Drawing.Point(12, 448);
+            this.sceneLabel.Name = "sceneLabel";
+            this.sceneLabel.Size = new System.Drawing.Size(97, 23);
+            this.sceneLabel.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 466);
+            this.Controls.Add(this.sceneLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cLabel);
             this.Controls.Add(this.bLabel);
@@ -172,6 +183,7 @@
         private System.Windows.Forms.Label bLabel;
         private System.Windows.Forms.Label cLabel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label sceneLabel;
     }
 }
 

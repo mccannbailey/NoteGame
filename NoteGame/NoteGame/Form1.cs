@@ -22,11 +22,12 @@ namespace NoteGame
         {
             InitializeComponent();
             rnd = new Random();
-            chance = rnd.Next(1, 101);
+            chance = rnd.Next(1, 11);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            sceneLabel.Text = Convert.ToString(scene);
             aLabel.Text = "";
             bLabel.Text = "";
             cLabel.Text = "";
@@ -69,13 +70,13 @@ namespace NoteGame
                         }
                         else if (back == true)
                         {
-                            if (chance >= 1 && chance < 31)
+                            if (chance >= 1 && chance < 4)
                             {
                                 outcomeLabel.Text = "Fail, turn and hop to the next rooftop, the man in close pursuit";
                                 ladder = 2;
                                 scene = 5;
                             }
-                            else if (chance >= 31 && chance < 101)
+                            else if (chance >= 4 && chance < 11)
                             {
                                 outcomeLabel.Text = "Succeed, the man falls off, knocking him unconcious";
                                 //ladderBreak = true;
@@ -84,15 +85,15 @@ namespace NoteGame
                             }
                         }
                         break;
-                    case 5:                                                                             //SCENARIOS UNREACHABLE
-                        if (front == true && chance >= 1 && chance <= 50)
+                    case 5:                                                                             
+                        if (front == true && chance >= 1 && chance < 6)
                         {
                             //restart button
                             outcomeLabel.Text = "Escape with the crowd to safety. YOU WIN!";
                             outcomeLabel.BackColor = Color.Gold;
                             outcomeLabel.ForeColor = Color.White;
                         }
-                        else if (back == true && chance >= 51 && chance <= 101)
+                        else if (front == true && chance >= 6 && chance < 11)
                         {
                             //restart button
                             outcomeLabel.Text = "You see a glare in a window from a building across the street. BANG.";
@@ -103,6 +104,39 @@ namespace NoteGame
                         {
                             outcomeLabel.Text = "You land in an empty office floor, a custodian closet beside you and a stairwell nearby";
                             scene = 6;
+                        }
+                        else if (back == true && ladder == 1)
+                        {
+                            outcomeLabel.Text = "Run and jump to the next rooftop.";
+                            scene = 6;
+                        }
+                        else if (back == true && ladder == 2)
+                        {
+                            //restart button
+                            outcomeLabel.Text = "You look behind you. The man says to his earpiece \"target in open sight\" You hear a loud gunshot. Darkness";
+                            outcomeLabel.ForeColor = Color.White;
+                            outcomeLabel.BackColor = Color.Red;
+                        }
+                        break;
+                    case 6:
+                        if (back == true && ladder == 0)
+                        {
+                            outcomeLabel.Text = "You land in an empty office floor, a custodian closet beside you and a stairwell nearby";
+                            scene = 7;
+                        }
+                        else if (back == true && ladder == 1)
+                        {
+                            outcomeLabel.Text = "You land in an empty office floor, a custodian closet beside you and a stairwell nearby";
+                            scene = 7;
+                        }
+                        break;
+                    case 7:
+                        if (back == true && ladder == 0 || back == true && ladder == 1)
+                        {
+                            //restart button
+                            outcomeLabel.Text = "You hide for hours and are never found!";
+                            outcomeLabel.BackColor = Color.Gold;
+                            outcomeLabel.ForeColor = Color.White;
                         }
                         break;
                 }
@@ -163,14 +197,14 @@ namespace NoteGame
                         }                        
                         break;
                     case 5:
-                        if (front == true && chance >= 1 && chance <= 30)
+                        if (front == true && chance >= 1 && chance < 4)
                         {
                             //restart button
                             outcomeLabel.Text = "Hide with the restaurant staff, you're never found. YOU WIN!";
                             outcomeLabel.BackColor = Color.Gold;
                             outcomeLabel.ForeColor = Color.White;
                         }
-                        else if (back == true && chance >= 31 && chance <= 101)
+                        else if (back == true && chance >= 4 && chance < 11)
                         {
                             //restart button
                             outcomeLabel.Text = "The men in suits follow you to the restaurant and take you into their custody.";
@@ -180,6 +214,27 @@ namespace NoteGame
                         else if (back == true && hatch == true)
                         {
                             outcomeLabel.Text = "Open the roof hatch and drop in"; //60/40
+                        }
+                        break;
+                    case 6:
+                        if (back == true && ladder == 1)
+                        {
+                            outcomeLabel.Text = "The hatch is a safe drop down.";
+                            aLabel.Text = "Continue";
+                            bLabel.Text = "";
+                            if (e.KeyCode == Keys.A)
+                            {
+                                scene = 7;
+                            }                            
+                        }
+                        break;
+                    case 7:
+                        if (back == true && ladder == 0 || back == true && ladder == 1)
+                        {
+                            //restart button
+                            outcomeLabel.Text = "A suit is waiting for you in there, you hear a deafening bang. Darkness";
+                            outcomeLabel.BackColor = Color.Red;
+                            outcomeLabel.ForeColor = Color.White;
                         }
                         break;
                 }
@@ -202,6 +257,8 @@ namespace NoteGame
                     case 4:
                         break;
                     case 5:
+                        break;
+                    case 6:
                         break;
                 }
             }
@@ -263,10 +320,45 @@ namespace NoteGame
                     else if (back == true && ladder == 1)
                     {
                         aLabel.Text = "Run and jump to the next rooftop";
+                        bLabel.Text = "";
+                        cLabel.Text = "";
+                    }
+                    else if (back == true && ladder == 2)
+                    {
+                        outcomeLabel.Text = "You look behind you. The man says to his earpiece \"target in open sight\" You hear a loud gunshot.Darkness";
+                        outcomeLabel.ForeColor = Color.White;
+                        outcomeLabel.BackColor = Color.Red;
+                    }
+                    break;
+                case 6:
+                    if (front == true)
+                    {
+                        aLabel.Text = "Error"; 
+                        bLabel.Text = "";
+                        cLabel.Text = "";
+                    }
+                    else if (back == true && ladder == 0) 
+                    {
+                        aLabel.Text = "Open the roof hatch and drop in"; //60/40 
+                        bLabel.Text = "";
+                        cLabel.Text = "";
+                    }
+                    else if (back == true && ladder == 1)
+                    {
+                        aLabel.Text = "Open the hatch and jump down.";
+                        bLabel.Text = "Open the hatch and inspect the drop.";
+                        cLabel.Text = "";
+                    }
+                    break;
+                case 7:
+                    if (back == true && ladder == 0)
+                    {
+                        aLabel.Text = "Hide in the closet.";
+                        bLabel.Text = "Run into the stairwell.";
                     }
                     break;
             }
         }
     }
 }
-// LEFT OFF ON CASE 6                       
+// SHAKE LADDER LEADS TO EARPIECE SCENE, WRONG                      
